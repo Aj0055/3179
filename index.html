@@ -1,36 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First HTML Doc</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Queensland's libraries: where they are and who they reach</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f5f1;--ink:#1f2a2c;--muted:#5b6660;--line:#d5dad3;--accent:#2f5d62}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.65 'Newsreader',Georgia,serif}
+header,section,footer{padding:0 1.25rem}
+.col{max-width:38rem;margin:0 auto 0 max(1.25rem,calc((100vw - 62rem)/2))}
+.wide{max-width:62rem;margin:0 auto}
+header{padding-top:5rem;padding-bottom:2rem}
+h1{font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.05;font-weight:600;margin:0 0 1.25rem;letter-spacing:-.02em}
+h2{font-size:1.9rem;line-height:1.2;font-weight:600;margin:0 0 .75rem}
+.lede{font-size:1.35rem;color:var(--muted);margin:0}
+section{padding-top:3.5rem;padding-bottom:1rem;border-top:1px solid var(--line);margin-top:3rem}
+p{margin:0 0 1rem}
+.fig{margin:1.75rem auto 0;min-height:540px}
+.note{font:.85rem/1.5 'IBM Plex Sans',sans-serif;color:var(--muted);max-width:38rem;margin:.5rem 0 0}
+.bi{display:grid;grid-template-columns:repeat(3,2.2rem);gap:2px;margin:.5rem 0}
+.bi i{height:2.2rem;display:block}
+.bilab{font:.85rem 'IBM Plex Sans',sans-serif;color:var(--muted);display:flex;gap:1.25rem;align-items:center;margin-top:1rem}
+footer{margin-top:4rem;padding-top:2rem;padding-bottom:3rem;border-top:1px solid var(--line);font:.9rem/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)}
+footer a{color:var(--accent)}
+@media (max-width:700px){.col{margin-left:auto}}
+</style>
 </head>
 <body>
-    <h1> Heading 1</h1>
-    <p>My First Paragraph</p>
+<header><div class="col">
+<h1>Queensland's libraries: where they are and who they reach</h1>
+<p class="lede">More than 300 libraries serve Queensland, from Brisbane's city branches to one-room libraries hundreds of kilometres from the coast. Do people use them equally everywhere?</p>
+</div></header>
 
-    <h2>Heading 2 </h2>
-    <p>Second paragraph</p>
+<section><div class="col">
+<h2>Libraries follow the people, and also the long roads</h2>
+<p>Most libraries cluster along the south-east coast, but small branches reach deep into the outback. Many of these are run through Rural Libraries Queensland, a partnership for councils with fewer than 15,000 people. Indigenous Knowledge Centres serve Aboriginal and Torres Strait Islander communities, often with the only library for hundreds of kilometres.</p>
+</div>
+<div class="wide fig" id="m1" data-spec="specs/map_library_locations.json"></div>
+<div class="col"><p class="note">Source: State Library of Queensland, Queensland public libraries directory (2026). 311 branches and community libraries shown.</p></div>
+</section>
 
-    <table border = "1" cellpadding="10%">
-        <tr>
-            <th>First Name</th>
-            <th>Last name</th>
-            <th>Grade</th>
-        </tr>
+<section><div class="col">
+<h2>Borrowing is far from even</h2>
+<p>In 2024-25 the average Queenslander borrowed 7.7 items. Gold Coast residents borrowed 12.3 each. Burke Shire borrowed 0.2, though very small councils can show extreme figures from tiny populations and incomplete counts. Sixteen Aboriginal and Torres Strait Islander councils appear in grey because the bulletin publishes no statistics for them.</p>
+</div>
+<div class="wide fig" id="m2" data-spec="specs/map_loans_per_resident.json"></div>
+<div class="col"><p class="note">Source: Queensland Public Libraries Statistical Bulletin 2024-25, State Library of Queensland (Feb 2026). Loans include physical and digital items.</p></div>
+</section>
 
-        <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>HD</td>
-        </tr>
-        
-    </table>
+<section><div class="col">
+<h2>Does disadvantage change who borrows?</h2>
+<p>This map combines two things. Colour shows how much residents borrow (from low to high) and how advantaged the area is, using ABS SEIFA. Dark blue means high borrowing in more advantaged areas. Pink-purple means more disadvantage with low borrowing, where libraries may have the most to give.</p>
+<div class="bilab"><div class="bi" aria-label="Colour key">
+<i style="background:#be64ac"></i><i style="background:#8c62aa"></i><i style="background:#3b4994"></i>
+<i style="background:#dfb0d6"></i><i style="background:#a5add3"></i><i style="background:#5698b9"></i>
+<i style="background:#e8e8e8"></i><i style="background:#ace4e4"></i><i style="background:#5ac8c8"></i></div>
+<div>Rows: more advantaged (top) to more disadvantaged (bottom).<br>Columns: low borrowing (left) to high borrowing (right).</div></div>
+</div>
+<div class="wide fig" id="m3" data-spec="specs/map_bivariate.json"></div>
+<div class="col"><p class="note">Sources: State Library of Queensland (2024-25); ABS, Socio-Economic Indexes for Australia (SEIFA) 2021, Index of Relative Socio-economic Disadvantage. Boundaries: ABS ASGS Edition 3, 2021 Local Government Areas. SEIFA is from the 2021 Census, library data from 2024-25.</p></div>
+</section>
 
-    <h3>Hyperlink test </h3>
-    <a href="https://www.monash.edu">
-        Click here to view Monash website
-    </a>
+<footer><div class="col">
+<p><strong>Author:</strong> [Your name], FIT3179 Data Visualisation 2, Monash University. 13 October 2026.</p>
+<p><strong>Data:</strong> State Library of Queensland, <em>Queensland Public Libraries Statistical Bulletin 2024-25</em> and <em>Queensland public libraries directory</em>; Australian Bureau of Statistics, SEIFA 2021 and ASGS Edition 3 (CC BY 4.0). Charts are built with Vega-Lite; the specifications are in the <a href="specs/">specs</a> folder.</p>
+<p><strong>AI use:</strong> Claude (Anthropic) helped write the data-preparation script, chart specifications and page layout.</p>
+</div></footer>
 
+<script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+<script>document.querySelectorAll('[data-spec]').forEach(e=>vegaEmbed(e,e.dataset.spec,{actions:false}));</script>
 </body>
 </html>

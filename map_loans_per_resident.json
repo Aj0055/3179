@@ -1,0 +1,88 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "How often people borrow",
+    "subtitle": "Items borrowed per resident, 2024-25. Grey councils have no figures in the bulletin",
+    "anchor": "start",
+    "font": "Newsreader",
+    "fontSize": 18,
+    "subtitleFont": "IBM Plex Sans",
+    "subtitleColor": "#5b6660"
+  },
+  "width": "container",
+  "height": 520,
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [
+      -12,
+      -28
+    ],
+    "rotate": [
+      -145,
+      0
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/qld_lga.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e4e7e2",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.5
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "isValid(datum.properties.usage_pc)"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#fff",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "color": {
+          "field": "properties.usage_pc",
+          "type": "quantitative",
+          "scale": {
+            "type": "quantile",
+            "scheme": "tealblues"
+          },
+          "legend": {
+            "title": "Loans per resident",
+            "orient": "bottom"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.name",
+            "title": "Council"
+          },
+          {
+            "field": "properties.usage_pc",
+            "title": "Loans per resident"
+          },
+          {
+            "field": "properties.members_pct",
+            "title": "Members % of population"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "IBM Plex Sans"
+  }
+}
