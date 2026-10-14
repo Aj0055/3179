@@ -1,0 +1,135 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Library use and disadvantage together",
+    "subtitle": "Borrowing level (low to high) against socio-economic disadvantage (SEIFA 2021)",
+    "anchor": "start",
+    "font": "Newsreader",
+    "fontSize": 18,
+    "subtitleFont": "IBM Plex Sans",
+    "subtitleColor": "#5b6660"
+  },
+  "width": "container",
+  "height": 520,
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [
+      -12,
+      -28
+    ],
+    "rotate": [
+      -145,
+      0
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/qld_lga.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "qld_lga"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e4e7e2",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.5
+      }
+    },
+    {
+      "data": {
+        "url": "data/qld_lga.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "qld_lga"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.lga_code_2021",
+          "from": {
+            "data": {
+              "url": "data/library_stats.csv",
+              "format": {
+                "type": "csv",
+                "parse": {
+                  "lga_code_2021": "string"
+                }
+              }
+            },
+            "key": "lga_code_2021",
+            "fields": [
+              "name",
+              "usage_pc",
+              "irsd_decile",
+              "bi"
+            ]
+          }
+        },
+        {
+          "filter": "isValid(datum.bi)"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#fff",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "color": {
+          "field": "bi",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "00",
+              "10",
+              "20",
+              "01",
+              "11",
+              "21",
+              "02",
+              "12",
+              "22"
+            ],
+            "range": [
+              "#e8e8e8",
+              "#ace4e4",
+              "#5ac8c8",
+              "#dfb0d6",
+              "#a5add3",
+              "#5698b9",
+              "#be64ac",
+              "#8c62aa",
+              "#3b4994"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "title": "Council"
+          },
+          {
+            "field": "usage_pc",
+            "type": "quantitative",
+            "title": "Loans per resident"
+          },
+          {
+            "field": "irsd_decile",
+            "type": "quantitative",
+            "title": "Disadvantage decile (1 = most disadvantaged)"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "IBM Plex Sans"
+  }
+}

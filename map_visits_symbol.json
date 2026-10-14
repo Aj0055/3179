@@ -1,0 +1,97 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "How many people walk through the door",
+    "subtitle": "Physical visits in 2024-25. Each circle sits at the centre of its council",
+    "anchor": "start",
+    "font": "Newsreader",
+    "fontSize": 18,
+    "subtitleFont": "IBM Plex Sans",
+    "subtitleColor": "#5b6660"
+  },
+  "width": "container",
+  "height": 520,
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [
+      -12,
+      -28
+    ],
+    "rotate": [
+      -145,
+      0
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/qld_lga.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "qld_lga"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e4e7e2",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.5
+      }
+    },
+    {
+      "data": {
+        "url": "data/council_points.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "opacity": 0.6,
+        "stroke": "#1f5559",
+        "strokeWidth": 0.8,
+        "fill": "#46888b"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "visits",
+          "type": "quantitative",
+          "title": "Visits a year",
+          "scale": {
+            "type": "sqrt",
+            "range": [
+              10,
+              2500
+            ]
+          },
+          "legend": {
+            "orient": "bottom"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "title": "Council"
+          },
+          {
+            "field": "visits",
+            "type": "quantitative",
+            "title": "Visits",
+            "format": ","
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "IBM Plex Sans"
+  }
+}

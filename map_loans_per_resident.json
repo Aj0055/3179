@@ -1,0 +1,129 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "How often people borrow",
+    "subtitle": "Items borrowed per resident, 2024-25. Grey councils have no figures in the bulletin",
+    "anchor": "start",
+    "font": "Newsreader",
+    "fontSize": 18,
+    "subtitleFont": "IBM Plex Sans",
+    "subtitleColor": "#5b6660"
+  },
+  "width": "container",
+  "height": 520,
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [
+      -12,
+      -28
+    ],
+    "rotate": [
+      -145,
+      0
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/qld_lga.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "qld_lga"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e4e7e2",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.5
+      }
+    },
+    {
+      "data": {
+        "url": "data/qld_lga.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "qld_lga"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.lga_code_2021",
+          "from": {
+            "data": {
+              "url": "data/library_stats.csv",
+              "format": {
+                "type": "csv",
+                "parse": {
+                  "lga_code_2021": "string"
+                }
+              }
+            },
+            "key": "lga_code_2021",
+            "fields": [
+              "name",
+              "usage_pc",
+              "members_pct"
+            ]
+          }
+        },
+        {
+          "filter": "isValid(datum.usage_pc)"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#fff",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "color": {
+          "field": "usage_pc",
+          "type": "quantitative",
+          "title": "Loans per resident",
+          "scale": {
+            "type": "threshold",
+            "domain": [
+              2,
+              4,
+              6,
+              8
+            ],
+            "range": [
+              "#e3efee",
+              "#b7d6d4",
+              "#7fb3b2",
+              "#46888b",
+              "#1f5559"
+            ]
+          },
+          "legend": {
+            "orient": "bottom"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "title": "Council"
+          },
+          {
+            "field": "usage_pc",
+            "type": "quantitative",
+            "title": "Loans per resident"
+          },
+          {
+            "field": "members_pct",
+            "type": "quantitative",
+            "title": "Members % of population"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "IBM Plex Sans"
+  }
+}
