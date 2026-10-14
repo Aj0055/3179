@@ -78,9 +78,14 @@ footer a{color:var(--accent)}
 <p><strong>AI use:</strong> Claude (Anthropic) helped write the data-preparation script, chart specifications and page layout.</p>
 </div></footer>
 
-<script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
-<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
-<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
-<script>document.querySelectorAll('[data-spec]').forEach(e=>vegaEmbed(e,e.dataset.spec,{actions:false}));</script>
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script>
+document.querySelectorAll('[data-spec]').forEach(e=>{
+  if(typeof vegaEmbed==='undefined'){e.textContent='Error: the Vega scripts did not load.';return;}
+  vegaEmbed(e,e.dataset.spec,{actions:false}).catch(err=>{e.textContent='Error in '+e.dataset.spec+': '+err.message;});
+});
+</script>
 </body>
 </html>
